@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor.Tools - Medical Equipment & Scrubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #1a6fc4, #2c8ac3);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #ffd166;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd166;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 111, 196, 0.8), rgba(44, 138, 195, 0.8)), url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ffd166;
+            color: #333;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            background-color: #ffc44d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #1a6fc4;
+            font-size: 2.2rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #ffd166;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: #1a6fc4;
+            font-size: 1.2rem;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: #e6f2ff;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            font-size: 60px;
+            color: #1a6fc4;
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: #1a6fc4;
+        }
+        
+        /* Future Products */
+        .future-products {
+            padding: 80px 0;
+            background: linear-gradient(to right, #1a6fc4, #2c8ac3);
+            color: white;
+        }
+        
+        .future-products .section-title {
+            color: white;
+        }
+        
+        .future-products .section-title:after {
+            background: #ffd166;
+        }
+        
+        .future-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .future-list li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+        
+        .future-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .future-list li i {
+            margin-right: 15px;
+            color: #ffd166;
+            font-size: 1.3rem;
+        }
+        
+        /* Contact Form */
+        .contact {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #ffd166;
+        }
+        
+        .footer-section p, .footer-section li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #ffd166;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-stethoscope"></i>
+                    <span>Doctor.Tools</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Premium Medical Equipment for Future Doctors</h1>
+            <p>High-quality scrubs, lab coats, and medical tools designed for medical students and professionals.</p>
+            <a href="#products" class="btn">Explore Products</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src=data:image/jpeg;base64,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 alt="Medical Scrubs">
+                    </div>
+                    <div class="product-info">
+                        <h3>Medical Scrubs</h3>
+                        <p>Comfortable, durable, and professional-looking scrubs for long shifts.</p>
+                        <p class="price">From pkr3500</p>
+                        <a href="#" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZLUbETCwViY1vz8Dbmi-QDIkkb1ShIZYvjw&s alt="Lab Coats">
+                    </div>
+                    <div class="product-info">
+                        <h3>Lab Coats</h3>
+                        <p>Professional lab coats with premium fabric and perfect fit.</p>
+                        <p class="price">From pkr900</p>
+                        <a href="#" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src=https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZG9jdG9yfGVufDB8fDB8fHww alt="Stethoscopes">
+                    </div>
+                    <div class="product-info">
+                        <h3>Stethoscopes</h3>
+                        <p>High-quality stethoscopes with exceptional acoustic performance.</p>
+                        <p class="price">From $39.99</p>
+                        <a href="#" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Doctor.Tools</h2>
+            <div class="about-content">
+                <p>Doctor.Tools was founded by medical professionals who understand the needs of students and practitioners. We know that having reliable, high-quality equipment is essential for providing the best patient care.</p>
+                <p>Our mission is to provide medical students and professionals with affordable, durable, and functional medical tools and apparel that will support them throughout their careers.</p>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The scrubs I bought from Doctor.Tools are the most comfortable I've ever worn. Perfect for those long shifts in the hospital!"</p>
+                    <p class="testimonial-author">- Sarah J., Medical Student</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The stethoscope I purchased has excellent sound quality. It's made diagnosing patients much easier during my rotations."</p>
+                    <p class="testimonial-author">- Michael T., 3rd Year Med Student</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Finally found a lab coat that fits well and looks professional. The quality is outstanding for the price!"</p>
+                    <p class="testimonial-author">- Jessica L., Resident Physician</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Products -->
+    <section class="future-products">
+        <div class="container">
+            <h2 class="section-title">Coming Soon</h2>
+            <ul class="future-list">
+                <li><i class="fas fa-heartbeat"></i> Blood Pressure Monitors</li>
+                <li><i class="fas fa-thermometer"></i> Digital Thermometers</li>
+                <li><i class="fas fa-band-aid"></i> Diagnostic Sets</li>
+                <li><i class="fas fa-syringe"></i> Medical Kits</li>
+                <li><i class="fas fa-book-medical"></i> Medical Reference Books</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" placeholder="How can we help you?"></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Doctor.Tools</h3>
+                    <p>Providing quality medical equipment and apparel for the next generation of healthcare professionals.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Medical Way, Healthcare, CA 94301</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@doctor.tools</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Doctor.Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to product cards on scroll
+            const productCards = document.querySelectorAll('.product-card');
+            
+            function checkScroll() {
+                productCards.forEach(card => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (cardPosition < screenPosition) {
+                        card.style.opacity = 1;
+                        card.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Set initial state for animation
+            productCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Check scroll on load and scroll
+            window.addEventListener('scroll', checkScroll);
+            checkScroll();
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Form submission handling
+            const contactForm = document.querySelector('.contact-form');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thanks for your message! We will get back to you soon.');
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
